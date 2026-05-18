@@ -9,11 +9,11 @@ variable "application" {
 }
 
 variable "env_prefix" {
-  default = "dev"
+  default = "staging"
 }
 
 variable "cluster_name" {
-  default = "my-eks-cluster"
+  default = "my-staging-eks-cluster"
 }
 
 variable "cluster_version" {

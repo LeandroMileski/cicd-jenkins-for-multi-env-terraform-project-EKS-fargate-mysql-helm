@@ -1,0 +1,27 @@
+architecture: replication
+global:
+  security:
+    allowInsecureImages: true
+
+image:
+  registry: docker.io
+  repository: bitnamilegacy/mysql
+  tag: latest
+
+# enable init container that changes the owner and group of the persistent volume mountpoint to runAsUser:fsGroup
+volumePermissions:
+  enabled: true
+
+secondary:
+  # 1 primary and 2 secondary replicas
+  replicaCount: 2
+  persistence:
+    accessModes: ["ReadWriteOnce"]
+    # storage class for EKS volumes
+    storageClass: gp2
+
+auth:
+  database: "javaapp"
+  username: "javaapp"
+  password: "my-pass"
+  # rootPassword intentionally absent — injected via set_sensitive

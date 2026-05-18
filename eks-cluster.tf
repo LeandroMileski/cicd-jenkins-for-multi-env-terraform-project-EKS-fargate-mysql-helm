@@ -43,4 +43,16 @@ module "eks" {
     Terraform   = "true"
     Application = var.application.name
   }
+
+  fargate_profiles = {
+    profile = {
+      name = "my-fargate-profile"
+      selectors = [
+        {
+          namespace = "my-app"
+        }
+      ]
+    }
+  }
+
 }
