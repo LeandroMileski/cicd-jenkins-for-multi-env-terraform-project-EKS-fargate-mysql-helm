@@ -4,6 +4,11 @@ provider "aws" {
 
 data "aws_availability_zones" "available" {}
 
+locals {
+  cluster_name = var.cluster_name 
+}
+
+
 module "vpc" {
     version = "~> 5.0" # This locks the VPC module to the v5 lifecycle, compatible with EKS
 
@@ -20,16 +25,17 @@ module "vpc" {
     single_nat_gateway = true
     enable_dns_hostnames = true
 
-    # Required tags for EKS subnet auto-discovery
-    public_subnet_tags = {
-        "kubernetes.io/role/elb" = 1
-    }
-    private_subnet_tags = {
-        "kubernetes.io/role/internal-elb" = 1
+    tags = {
+        "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     }
 
-    tags = {        
-        Terraform = "true"
-        Environment = "dev"
+    public_subnet_tags = {
+        "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+        "kubernetes.io/role/elb"                      = "1"
+    }
+
+    private_subnet_tags = {
+        "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+        "kubernetes.io/role/internal-elb"             = "1"
     }
 }

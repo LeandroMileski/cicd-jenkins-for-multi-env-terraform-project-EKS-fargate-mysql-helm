@@ -13,13 +13,18 @@ module "eks" {
   subnet_ids = module.vpc.private_subnets
 
   eks_managed_node_groups = {
-    dev = {
+    node_group = {
       instance_types = [var.node_instance_type]
       ami_type       = "AL2023_x86_64_STANDARD"
 
       min_size     = var.node_min_size
       max_size     = var.node_max_size
       desired_size = var.node_desired_size
+      
+      tags = {
+        Name = "${var.env_prefix}"
+      }   
+
     }
   }
 
@@ -28,14 +33,13 @@ module "eks" {
     eks-pod-identity-agent = { before_compute = true }
     kube-proxy             = {}
     vpc-cni                = { before_compute = true }
-    aws-ebs-csi-driver = {
-      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
-      most_recent              = true
-    }
+    aws-ebs-csi-driver     = { 
+      most_recent    = true 
+      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn }
   }
 
   tags = {
-    Environment = "dev"
+    Environment = "${var.env_prefix}"
     Terraform   = "true"
     Application = var.application.name
   }

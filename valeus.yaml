@@ -1,0 +1,25 @@
+global:
+  security:
+    allowInsecureImages: true
+
+image:
+  registry: docker.io
+  repository: bitnamilegacy/mysql
+  tag: latest
+
+primary:
+  replicaCount: 1
+
+secondary:
+  replicaCount: 2          # primary + 2 secondary = 3 total
+
+  persistence:
+    enabled: true
+    storageClass: "gp2"    # EBS backed — requires the CSI driver
+    size: 8Gi
+
+auth:
+  rootPassword: ""         # set via var or secrets manager, never hardcoded
+  database: "javaapp"
+  username: "javaapp"
+  password: ""             # same — use a variable

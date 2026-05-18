@@ -8,7 +8,7 @@ variable "application" {
   }
 }
 
-variable "environment" {
+variable "env_prefix" {
   default = "dev"
 }
 
