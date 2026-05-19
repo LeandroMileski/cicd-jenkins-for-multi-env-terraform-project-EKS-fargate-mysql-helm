@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION    = "eu-west-1"
-        TF_VAR_env_prefix     = "${ENV}"
+        TF_VAR_env_prefix     = "${params.ENV}"
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
