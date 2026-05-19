@@ -6,7 +6,7 @@ global:
 image:
   registry: docker.io
   repository: bitnamilegacy/mysql
-  tag: latest
+  tag: "sha256-d0b33f06937bfac858ac9780be94ceca872543b30319f80c156bcb243915d1de"
 
 # enable init container that changes the owner and group of the persistent volume mountpoint to runAsUser:fsGroup
 volumePermissions:

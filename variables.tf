@@ -19,7 +19,7 @@ variable "env_prefix" {
 }
 
 variable "cluster_name" {
-  default = "my-test-eks-cluster"
+  default = "eks-test"
 }
 
 variable "cluster_version" {

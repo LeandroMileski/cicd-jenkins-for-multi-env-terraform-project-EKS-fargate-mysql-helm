@@ -37,4 +37,8 @@ resource "helm_release" "mysql" {
   values = [file("values.yaml")]
 
   depends_on = [module.eks]
+
+  # for debuggin purposes
+  atomic           = false
+  cleanup_on_fail  = false
 }
