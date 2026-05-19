@@ -5,8 +5,5 @@
 *.tfstate
 *.tfstate.*
 
-# tf variable files, may include sensitive data
-*.tfvars
-
 # .ds_store file
 .ds_store
