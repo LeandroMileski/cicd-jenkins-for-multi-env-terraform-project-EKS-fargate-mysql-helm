@@ -21,7 +21,7 @@ secondary:
     storageClass: gp2
 
 auth:
-  database: "javaapp"
-  username: "javaapp"
-  password: "my-pass"
-  # rootPassword intentionally absent — injected via set_sensitive
+  rootPassword: secret-root-pass
+  database: my-app-db
+  username: my-user
+  password: my-pass

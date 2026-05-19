@@ -1,3 +1,5 @@
+# Use the following to ensure that Terraform waits for the EKS cluster to be fully created before provisioning dependent resources
+
 # This gives back object with certificate-authority among other attributes: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster#attributes-reference
 data "aws_eks_cluster" "cluster" {
   name = module.eks.cluster_name
@@ -25,25 +27,14 @@ provider "helm" {
   }
 }
 
-data "aws_secretsmanager_secret_version" "mysql_root" {
-  secret_id  = aws_secretsmanager_secret.mysql_root.id
-  depends_on = [aws_secretsmanager_secret_version.mysql_root]
-}
-
 resource "helm_release" "mysql" {
   name             = "mysql"
-  repository       = "https://charts.bitnami.com/bitnami"
+  repository       = "oci://registry-1.docker.io/bitnamicharts"
   chart            = "mysql"
   namespace        = "mysql"
   create_namespace = true
 
   values = [file("values.yaml")]
-
-  set_sensitive = [
-    {
-    name  = "auth.rootPassword"
-    value = data.aws_secretsmanager_secret_version.mysql_root.secret_string
-  }]
 
   depends_on = [module.eks]
 }

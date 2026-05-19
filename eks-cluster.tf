@@ -23,21 +23,17 @@ module "eks" {
       
       tags = {
         Name = "${var.env_prefix}"
-      }   
-
+      }
+      # EBS CSI Driver policy
+      iam_role_additional_policies = {
+        AmazonEBSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+      }  
     }
   }
-
+  # Starting from EKS 1.23 CSI plugin is needed for volume provisioning.
   cluster_addons = {
-    coredns                = {}
-    eks-pod-identity-agent = { before_compute = true }
-    kube-proxy             = {}
-    vpc-cni                = { before_compute = true }
-    aws-ebs-csi-driver     = { 
-      most_recent    = true 
-      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn }
+    aws-ebs-csi-driver     = {}
   }
-
   tags = {
     Environment = "${var.env_prefix}"
     Terraform   = "true"
