@@ -8,4 +8,9 @@ Milestone 2 is about team safety. Once more than one person is running terraform
 
 Milestone 3 is about removing humans from the loop entirely. The platform team pushes to the Terraform repo, the pipeline provisions the cluster. The manual approval gate before apply is the last checkpoint before infra changes hit a live environment.
 
+Pipeline triggered by webhook github.
+https://plugins.jenkins.io/github/#plugin-content-automatic-mode-jenkins-manages-hooks-for-jobs-by-itself
+
+
 ![alt text](eks_multi_env_roadmap.svg)
+
