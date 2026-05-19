@@ -28,17 +28,20 @@ provider "helm" {
 }
 
 resource "helm_release" "mysql" {
-  name             = "mysql"
-  repository       = "oci://registry-1.docker.io/bitnamicharts"
+  name             = "my-release-mysql"
+  repository       = "https://charts.bitnami.com/bitnami"
   chart            = "mysql"
-  namespace        = "mysql"
-  create_namespace = true
+  version          = "9.14.0"
+  timeout          = "1000" # seconds
 
   values = [file("values.yaml")]
 
   depends_on = [module.eks]
 
-  # for debuggin purposes
-  atomic           = false
-  cleanup_on_fail  = false
+   # Set chart values individually
+  set = [{
+    name  = "volumePermissions.enabled" 
+    value = true
+  }]
+
 }
