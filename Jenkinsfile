@@ -11,6 +11,10 @@ pipeline {
         TF_VAR_env_prefix     = "${params.ENV}"
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+        HELM_CACHE_HOME       = "/tmp/helm/cache"
+        HELM_CONFIG_HOME      = "/tmp/helm/config"
+        HELM_DATA_HOME        = "/tmp/helm/data"
+
     }
 
     parameters {

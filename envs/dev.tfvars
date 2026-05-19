@@ -1,4 +1,5 @@
-env_prefix = "dev"
-k8s_version = "1.28"
-region = "eu-west-1"
-cluster_name = "my-dev-eks-cluster"
+# envs/dev.tfvars
+env_prefix    = "dev"
+cluster_name  = "eks-dev"
+node_min_size = 1
+node_max_size = 3

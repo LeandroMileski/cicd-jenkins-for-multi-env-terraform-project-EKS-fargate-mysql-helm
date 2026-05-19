@@ -8,6 +8,12 @@ variable "application" {
   }
 }
 
+variable "k8s_version" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.33"
+}
+
 variable "env_prefix" {
   default = "test"
 }

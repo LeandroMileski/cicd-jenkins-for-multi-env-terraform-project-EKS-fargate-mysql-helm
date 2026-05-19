@@ -1,4 +1,5 @@
-env_prefix = "staging"
-k8s_version = "1.28"
-region = "eu-west-1"
-cluster_name = "my-staging-eks-cluster"
+# envs/staging.tfvars
+env_prefix    = "staging"
+cluster_name  = "eks-staging"
+node_min_size = 1
+node_max_size = 3
