@@ -6,11 +6,19 @@ global:
 image:
   registry: docker.io
   repository: bitnamilegacy/mysql
-  tag: "sha256-d0b33f06937bfac858ac9780be94ceca872543b30319f80c156bcb243915d1de"
+  tag: "8.0"
 
 # enable init container that changes the owner and group of the persistent volume mountpoint to runAsUser:fsGroup
 volumePermissions:
   enabled: true
+
+primary:
+  persistence:
+    enabled: true
+    storageClass: gp3
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
 
 secondary:
   # 1 primary and 2 secondary replicas
@@ -18,7 +26,7 @@ secondary:
   persistence:
     accessModes: ["ReadWriteOnce"]
     # storage class for EKS volumes
-    storageClass: gp2
+    storageClass: gp3
 
 auth:
   rootPassword: secret-root-pass
