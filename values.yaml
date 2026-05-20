@@ -8,14 +8,11 @@ image:
   repository: bitnamilegacy/mysql
   tag: "8.0"
 
-# enable init container that changes the owner and group of the persistent volume mountpoint to runAsUser:fsGroup
-volumePermissions:
-  enabled: true
 
 primary:
   persistence:
     enabled: true
-    storageClass: gp3
+    storageClass: gp2
     accessModes:
       - ReadWriteOnce
     size: 8Gi
@@ -26,7 +23,7 @@ secondary:
   persistence:
     accessModes: ["ReadWriteOnce"]
     # storage class for EKS volumes
-    storageClass: gp3
+    storageClass: gp2
     size: 8Gi
 
 auth:

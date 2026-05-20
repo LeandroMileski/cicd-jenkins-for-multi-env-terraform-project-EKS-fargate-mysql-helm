@@ -33,15 +33,11 @@ resource "helm_release" "mysql" {
   chart            = "mysql"
   version          = "9.14.0"
   timeout          = "1000" # seconds
+  namespace        = "mysql"
+  create_namespace = true
 
   values = [file("values.yaml")]
 
   depends_on = [module.eks]
-
-   # Set chart values individually
-  set = [{
-    name  = "volumePermissions.enabled" 
-    value = true
-  }]
 
 }
