@@ -27,6 +27,7 @@ secondary:
     accessModes: ["ReadWriteOnce"]
     # storage class for EKS volumes
     storageClass: gp3
+    size: 8Gi
 
 auth:
   rootPassword: secret-root-pass
