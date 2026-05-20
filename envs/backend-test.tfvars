@@ -1,2 +1,3 @@
+# envs/backend-test.tfvars
 bucket         = "amzn-eks-backend"
-key            = "environments/test/terraform.tfstate"
+key            = "test/terraform.tfstate"

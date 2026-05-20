@@ -36,7 +36,8 @@ pipeline {
             steps {
                 sh """
                     terraform init \
-                        -backend-config="key=${ENV}/terraform.tfstate"
+                        -backend-config="envs/backend-${params.ENV}.tfvars" \
+                        -reconfigure
                 """
             }
         }
